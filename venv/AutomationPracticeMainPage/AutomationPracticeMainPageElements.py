@@ -8,7 +8,8 @@ from Config.Helper import helpers
 search_bar = "//input[contains (@id, 'search_query_top')]"
 search_result = "//div[contains (@class, 'ac_results')]"
 search_confirm_button = "//form[contains (@id, 'searchbox')]/button"
-
+product_on_search_result = "//span[contains (text(), '$28.98')]/ancestor::div[contains (@class, 'product-container')]"
+quick_view_product_button = "//span[contains (text(), 'Quick view')]"
 class AutomationPracticeMainPageElements():
     def __init__(self, driver):
         self.driver = driver
@@ -22,19 +23,15 @@ class AutomationPracticeMainPageElements():
 
         self.helpers.fluentWait(search_result)
 
-        # element = WebDriverWait(self.driver, 10).until(
-        #     EC.presence_of_element_located((By.XPATH, search_result))
-        # )
-
         self.driver.find_element_by_xpath(search_confirm_button).click()
 
     def addProductToCard(self):
-        self.driver.find_element_by_xpath(
-            "//span[contains (text(), '$28.98')]/ancestor::div[contains (@class, 'product-container')]")
-        product = self.driver.find_element_by_xpath("//span[contains (text(), '$28.98')]/ancestor::div[contains (@class, 'product-container')]")
+        self.helpers.fluentWait(product_on_search_result)
+
+        product = self.driver.find_element_by_xpath(product_on_search_result)
         action = ActionChains(self.driver)
         action.move_to_element(product).perform()
-        self.driver.find_element_by_xpath("//span[contains (text(), 'Quick view')]").click()
+        self.helpers.waitAndClick(quick_view_product_button)
         self.driver.switch_to.frame(self.driver.find_element_by_xpath("//*[contains (@id, 'fancybox-frame')]"))
 
         self.helpers = helpers(self.driver)
