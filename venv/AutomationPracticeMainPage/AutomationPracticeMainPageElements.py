@@ -34,15 +34,18 @@ class AutomationPracticeMainPageElements():
         action = ActionChains(self.driver)
         action.move_to_element(product).perform()
         self.helpers.waitAndClick(quick_view_product_button)
+        self.helpers.fluentWait("//*[contains (@id, 'fancybox-frame')]")
         self.driver.switch_to.frame(self.driver.find_element_by_xpath("//*[contains (@id, 'fancybox-frame')]"))
 
         self.helpers = helpers(self.driver)
-        self.helpers.fluentWait("//*[contains (@id, 'add_to_cart')]")
+        self.helpers.waitAndClick("//*[contains (@id, 'add_to_cart')]/button")
 
-        self.driver.find_element_by_xpath("//*[contains (@id, 'add_to_cart')]").click()
+        # self.driver.find_element_by_xpath("//*[contains (@id, 'add_to_cart')]").click()
+
+        self.driver.switch_to.default_content();
 
         element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//*[contains (@class, 'icon-ok')]"))
+            EC.presence_of_element_located((By.XPATH, "//i[contains (@class, 'icon-ok')]"))
         )
 
         # self.search_box.set_text('pants')

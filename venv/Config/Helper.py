@@ -21,3 +21,4 @@ class helpers():
         fluent_wait = WebDriverWait(self.driver, 10, 1,
                                     [ElementNotVisibleException, ElementNotSelectableException])
         element = fluent_wait.until(EC.element_to_be_clickable((By.XPATH, pageElement)))
+
