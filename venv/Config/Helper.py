@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import *
 
+
 class helpers():
     def __init__(self, driver):
         self.driver = driver
@@ -16,8 +17,7 @@ class helpers():
         )
         self.driver.find_element_by_xpath(pageElemenet).click()
 
-
     def fluentWait(self, pageElement):
-         fluent_wait = WebDriverWait(self.driver, 10, 1,
-                         [ElementNotVisibleException, ElementNotSelectableException])
-         element = fluent_wait.until(EC.element_to_be_clickable((By.XPATH, pageElement)))
+        fluent_wait = WebDriverWait(self.driver, 10, 1,
+                                    [ElementNotVisibleException, ElementNotSelectableException])
+        element = fluent_wait.until(EC.element_to_be_clickable((By.XPATH, pageElement)))

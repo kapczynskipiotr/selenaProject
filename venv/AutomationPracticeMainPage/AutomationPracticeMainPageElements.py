@@ -5,15 +5,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from Config.Helper import helpers
+
 search_bar = "//input[contains (@id, 'search_query_top')]"
 search_result = "//div[contains (@class, 'ac_results')]"
 search_confirm_button = "//form[contains (@id, 'searchbox')]/button"
 product_on_search_result = "//span[contains (text(), '$28.98')]/ancestor::div[contains (@class, 'product-container')]"
 quick_view_product_button = "//span[contains (text(), 'Quick view')]"
+
+
 class AutomationPracticeMainPageElements():
     def __init__(self, driver):
         self.driver = driver
-
 
     def search(self, url, product_name):
         self.helpers = helpers(self.driver)
@@ -36,17 +38,12 @@ class AutomationPracticeMainPageElements():
 
         self.helpers = helpers(self.driver)
         self.helpers.fluentWait("//*[contains (@id, 'add_to_cart')]")
-        # hehe = WebDriverWait(self.driver, 10).until(
-        #     EC.presence_of_element_located((By.XPATH, "//*[contains (@id, 'add_to_cart')]"))
-        # )
 
         self.driver.find_element_by_xpath("//*[contains (@id, 'add_to_cart')]").click()
 
         element = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//*[contains (@class, 'icon-ok')]"))
         )
-
-
 
         # self.search_box.set_text('pants')
         # self.search_result_of_search_box.click_button()
