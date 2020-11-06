@@ -5,6 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from Config.Helper import helpers
+import behave
+
 
 search_bar = "//input[contains (@id, 'search_query_top')]"
 search_result = "//div[contains (@class, 'ac_results')]"
@@ -17,8 +19,10 @@ class AutomationPracticeMainPageElements():
     def __init__(self, driver):
         self.driver = driver
 
+
     def search(self, url, product_name):
         self.helpers = helpers(self.driver)
+
         self.driver.get(url)
         self.getUrl = self.driver.current_url
         self.driver.find_element_by_xpath(search_bar).send_keys(product_name)
